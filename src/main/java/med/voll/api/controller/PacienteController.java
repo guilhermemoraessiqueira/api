@@ -23,7 +23,7 @@ public class PacienteController {
 
     @GetMapping
     public Page<DadosListagemPaciente> listar(Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemPaciente::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
     }
 
     @PutMapping
@@ -32,4 +32,13 @@ public class PacienteController {
         var paciente = repository.getReferenceById(dados.id());
         paciente.atualizarInformacoes(dados);
     }
+
+    @DeleteMapping("/{id}")
+    @org.springframework.transaction.annotation.Transactional
+    public void deletar(@PathVariable Long id){
+        var paciente = repository.getReferenceById(id);
+        paciente.excluir();
+
+    }
+
 }

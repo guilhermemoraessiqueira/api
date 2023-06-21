@@ -9,13 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AgendaDeConsultas {
-
+ 
     @Autowired
     private ConsultaRepository consultaRepository;
-
     @Autowired
     private MedicoRepository medicoRepository;
-
     @Autowired
     private PacienteRepository pacienteRepository;
 
@@ -33,7 +31,6 @@ public class AgendaDeConsultas {
         var medico = escolherMedico(dados);
         var consulta = new Consulta(null, medico, paciente, dados.data(), null);
         consultaRepository.save(consulta);
-
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {
